@@ -34,17 +34,21 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView.builder(
         itemCount: users.length,
-        itemBuilder: (context, index) => Card(
-          elevation: 5,
-          color: Colors.black38,
-          child: ListTile(
-            leading: CircleAvatar(
-                foregroundImage:
-                    NetworkImage(users[index]['picture']['medium'])),
-            title: Text(users[index]['name']['first']),
-            subtitle: Text(users[index]['email']),
-          ),
-        ),
+        itemBuilder: (context, index) {
+          final user = users[index];
+          final email = user['email'];
+          final name = user['name']['first'];
+          final imageUrl = user['picture']['thumbnail'];
+          return Card(
+            elevation: 5,
+            color: Colors.black38,
+            child: ListTile(
+              leading: CircleAvatar(foregroundImage: NetworkImage(imageUrl)),
+              title: Text(name),
+              subtitle: Text(email),
+            ),
+          );
+        },
       ),
     );
   }
