@@ -24,11 +24,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
     setState(() {
       users = results.map((e) {
+        var name = e['name'];
+        var picture = e['picture'];
         return User(
             gender: e['gender'],
             mail: e['email'],
             cell: e['cell'],
-            nat: e['nat']);
+            nat: e['nat'],
+            userName: UserName(
+                title: name['title'], first: name['first'], last: name['last']),
+            profileImage: ProfileImage(
+                large: picture['large'],
+                medium: picture['medium'],
+                thumbnail: picture['thumbnail']));
       }).toList();
     });
   }
@@ -48,8 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
             elevation: 5,
             color: Colors.black38,
             child: ListTile(
-              //leading: CircleAvatar(foregroundImage: NetworkImage(imageUrl)),
-              title: Text(users[index].gender),
+              leading: CircleAvatar(
+                  foregroundImage:
+                      NetworkImage(users[index].profileImage.thumbnail)),
+              title: Text(users[index].userName.first),
               subtitle: Text(users[index].mail),
             ),
           );
