@@ -33,10 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
             nat: e['nat'],
             userName: UserName(
                 title: name['title'], first: name['first'], last: name['last']),
-            profileImage: ProfileImage(
-                large: picture['large'],
-                medium: picture['medium'],
-                thumbnail: picture['thumbnail']));
+            profileImage: ProfileImage(thumbnail: picture['thumbnail']));
       }).toList();
     });
   }
@@ -54,13 +51,15 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (context, index) {
           return Card(
             elevation: 5,
-            color: Colors.black38,
+            color: Colors.lightBlueAccent,
             child: ListTile(
               leading: CircleAvatar(
                   foregroundImage:
                       NetworkImage(users[index].profileImage.thumbnail)),
-              title: Text(users[index].userName.first),
+              title: Text(
+                  '${users[index].userName.title}. ${users[index].userName.first} ${users[index].userName.last} '),
               subtitle: Text(users[index].mail),
+              trailing: Text(users[index].nat),
             ),
           );
         },

@@ -25,10 +25,7 @@ class UserName {
 }
 
 class ProfileImage {
-  final String large;
-  final String medium;
   final String thumbnail;
 
-  ProfileImage(
-      {required this.large, required this.medium, required this.thumbnail});
+  ProfileImage({required this.thumbnail});
 }
