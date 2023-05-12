@@ -1,3 +1,6 @@
+import './userpicture_model.dart';
+import './username_model.dart';
+
 class User {
   final String gender;
   final String mail;
@@ -14,18 +17,4 @@ class User {
     required this.userName,
     required this.profileImage,
   });
-}
-
-class UserName {
-  final String title;
-  final String first;
-  final String last;
-
-  UserName({required this.title, required this.first, required this.last});
-}
-
-class ProfileImage {
-  final String thumbnail;
-
-  ProfileImage({required this.thumbnail});
 }

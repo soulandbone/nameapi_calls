@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/username_model.dart';
 import '../models/user_model.dart';
+import '../models/userpicture_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,15 +26,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
     setState(() {
       users = results.map((e) {
-        var name = e['name'];
+        final name = UserName(
+            title: e['name']['title'],
+            first: e['name']['first'],
+            last: e['name']['last']);
         var picture = e['picture'];
         return User(
             gender: e['gender'],
             mail: e['email'],
             cell: e['cell'],
             nat: e['nat'],
-            userName: UserName(
-                title: name['title'], first: name['first'], last: name['last']),
+            userName: name,
             profileImage: ProfileImage(thumbnail: picture['thumbnail']));
       }).toList();
     });
