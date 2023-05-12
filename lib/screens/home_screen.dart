@@ -49,17 +49,17 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
+          final user = users[index];
           return Card(
             elevation: 5,
             color: Colors.lightBlueAccent,
             child: ListTile(
               leading: CircleAvatar(
-                  foregroundImage:
-                      NetworkImage(users[index].profileImage.thumbnail)),
+                  foregroundImage: NetworkImage(user.profileImage.thumbnail)),
               title: Text(
-                  '${users[index].userName.title}. ${users[index].userName.first} ${users[index].userName.last} '),
-              subtitle: Text(users[index].mail),
-              trailing: Text(users[index].nat),
+                  '${user.userName.title}. ${user.userName.first} ${user.userName.last} '),
+              subtitle: Text(user.mail),
+              trailing: Text(user.nat),
             ),
           );
         },
