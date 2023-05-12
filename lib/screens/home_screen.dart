@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
-import '../models/username_model.dart';
 import '../models/user_model.dart';
-import '../models/userpicture_model.dart';
+import '../services/user_api.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,39 +13,24 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<User> users = [];
 
-  final String url = 'https://randomuser.me/api/?results=10';
   void fetchUsers() async {
-    final uri = Uri.parse(url);
-    final response = await http.get(uri);
-    final json = jsonDecode(response.body);
-    final results = json['results'] as List<dynamic>;
-
+    final response = await UserApi.fetchUsers();
     setState(() {
-      users = results.map((e) {
-        final name = UserName(
-            title: e['name']['title'],
-            first: e['name']['first'],
-            last: e['name']['last']);
-        var picture = e['picture'];
-        return User(
-            gender: e['gender'],
-            mail: e['email'],
-            cell: e['cell'],
-            nat: e['nat'],
-            userName: name,
-            profileImage: ProfileImage(thumbnail: picture['thumbnail']));
-      }).toList();
+      users = response;
     });
+  }
+
+  @override
+  void initState() {
+    fetchUsers();
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Name API call')),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.arrow_downward),
-        onPressed: () => fetchUsers(),
-      ),
       body: ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
