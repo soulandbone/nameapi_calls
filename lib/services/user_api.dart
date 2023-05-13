@@ -17,14 +17,14 @@ class UserApi {
           title: e['name']['title'],
           first: e['name']['first'],
           last: e['name']['last']);
-      final picture = e['picture'];
+      final picture = e['picture']['thumbnail'];
       return User(
           gender: e['gender'],
           mail: e['email'],
           cell: e['cell'],
           nat: e['nat'],
           userName: name,
-          profileImage: ProfileImage(thumbnail: picture['thumbnail']));
+          profileImage: ProfileImage(thumbnail: picture));
     }).toList();
     return users;
   }
