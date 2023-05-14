@@ -17,4 +17,8 @@ class User {
     required this.userName,
     required this.profileImage,
   });
+
+  String get fullName {
+    return '${userName.title}. ${userName.first} ${userName.last} ';
+  }
 }

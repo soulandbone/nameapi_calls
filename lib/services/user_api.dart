@@ -11,7 +11,8 @@ class UserApi {
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final json = jsonDecode(response.body);
-    final results = json['results'] as List<dynamic>;
+    final results = json['results'] as List<
+        dynamic>; // so that it does not gets confused and knows that this is a List of Maps.
     final users = results.map((e) {
       final name = UserName(
           title: e['name']['title'],

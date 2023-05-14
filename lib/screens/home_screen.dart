@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<User> users = [];
 
-  void fetchUsers() async {
+  Future<void> fetchUsers() async {
     final response = await UserApi.fetchUsers();
     setState(() {
       users = response;
@@ -41,8 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListTile(
               leading: CircleAvatar(
                   foregroundImage: NetworkImage(user.profileImage.thumbnail)),
-              title: Text(
-                  '${user.userName.title}. ${user.userName.first} ${user.userName.last} '),
+              title: Text(user.fullName),
               subtitle: Text(user.mail),
               trailing: Text(user.nat),
             ),
