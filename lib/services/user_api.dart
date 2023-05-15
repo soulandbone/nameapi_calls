@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:nameapi_call/models/user_dob.dart';
+import 'package:nameapi_call/models/user_location.dart';
 
 import '../models/user_model.dart';
 import '../models/username_model.dart';
@@ -19,13 +21,32 @@ class UserApi {
           first: e['name']['first'],
           last: e['name']['last']);
       final picture = e['picture']['thumbnail'];
+      final date = e['dob']['date'];
+      final dob = UserDob(age: e['dob']['age'], date: DateTime.parse(date));
+      final location = UserLocation(
+        street: LocationStreet(
+            name: e['location']['street']['name'],
+            number: e['location']['street']['number'].toString()),
+        city: e['location']['city'],
+        state: e['location']['state'],
+        country: e['location']['country'],
+        postcode: e['location']['postcode'].toString(),
+        coordinates: LocationCoordinates(
+            latitude: e['location']['coordinates']['latitude'],
+            longitude: e['location']['coordinates']['longitude']),
+        timeZone: LocationTimeZone(
+            offset: e['location']['timezone']['offset'],
+            description: e['location']['timezone']['description']),
+      );
       return User(
           gender: e['gender'],
           mail: e['email'],
           cell: e['cell'],
           nat: e['nat'],
           userName: name,
-          profileImage: ProfileImage(thumbnail: picture));
+          profileImage: ProfileImage(thumbnail: picture),
+          location: location,
+          dob: dob);
     }).toList();
     return users;
   }

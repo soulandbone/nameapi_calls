@@ -1,3 +1,6 @@
+import 'package:nameapi_call/models/user_dob.dart';
+import 'package:nameapi_call/models/user_location.dart';
+
 import './userpicture_model.dart';
 import './username_model.dart';
 
@@ -8,6 +11,8 @@ class User {
   final String nat;
   final UserName userName;
   final ProfileImage profileImage;
+  final UserLocation location;
+  final UserDob dob;
 
   User({
     required this.gender,
@@ -16,6 +21,8 @@ class User {
     required this.nat,
     required this.userName,
     required this.profileImage,
+    required this.location,
+    required this.dob,
   });
 
   String get fullName {

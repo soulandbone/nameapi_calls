@@ -18,7 +18,7 @@ class UserLocation {
 }
 
 class LocationStreet {
-  final int number;
+  final String number; // was int number but its giving error
   final String name;
 
   LocationStreet({required this.number, required this.name});
