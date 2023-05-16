@@ -5,7 +5,6 @@ class UserDob {
   UserDob({required this.age, required this.date});
 
   factory UserDob.fromMap(Map<String, dynamic> e) {
-    return UserDob(
-        age: e['dob']['age'], date: DateTime.parse(e['dob']['date']));
+    return UserDob(age: e['age'], date: DateTime.parse(e['date']));
   }
 }

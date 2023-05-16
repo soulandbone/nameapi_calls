@@ -16,15 +16,18 @@ class UserLocation {
       required this.coordinates,
       required this.timeZone});
 
-  factory UserLocation.fromMap(Map<String, dynamic> e) {
+  factory UserLocation.fromMap(Map<String, dynamic> json) {
+    final coordinates = LocationCoordinates.fromMap(json['coordinates']);
+    final street = LocationStreet.fromMap(json['street']);
+    final timezone = LocationTimeZone.fromMap(json['timezone']);
     return UserLocation(
-        city: e['location']['city'],
-        country: e['location']['country'],
-        postcode: e['location']['postcode'].toString(),
-        state: e['location']['state'],
-        coordinates: LocationCoordinates.fromMap(e),
-        street: LocationStreet.fromMap(e),
-        timeZone: LocationTimeZone.fromMap(e));
+        city: json['city'],
+        country: json['country'],
+        postcode: json['postcode'].toString(),
+        state: json['state'],
+        coordinates: coordinates,
+        street: street,
+        timeZone: timezone);
   }
 }
 
@@ -34,10 +37,8 @@ class LocationStreet {
 
   LocationStreet({required this.number, required this.name});
 
-  factory LocationStreet.fromMap(Map<String, dynamic> e) {
-    return LocationStreet(
-        name: e['location']['street']['name'],
-        number: e['location']['street']['number']);
+  factory LocationStreet.fromMap(Map<String, dynamic> json) {
+    return LocationStreet(name: json['name'], number: json['number']);
   }
 }
 
@@ -47,10 +48,9 @@ class LocationCoordinates {
 
   LocationCoordinates({required this.latitude, required this.longitude});
 
-  factory LocationCoordinates.fromMap(Map<String, dynamic> e) {
+  factory LocationCoordinates.fromMap(Map<String, dynamic> json) {
     return LocationCoordinates(
-        latitude: e['location']['coordinates']['latitude'],
-        longitude: e['location']['coordinates']['longitude']);
+        latitude: json['latitude'], longitude: json['longitude']);
   }
 }
 
@@ -60,9 +60,8 @@ class LocationTimeZone {
 
   LocationTimeZone({required this.offset, required this.description});
 
-  factory LocationTimeZone.fromMap(Map<String, dynamic> e) {
+  factory LocationTimeZone.fromMap(Map<String, dynamic> json) {
     return LocationTimeZone(
-        offset: e['location']['timezone']['offset'],
-        description: e['location']['timezone']['description']);
+        offset: json['offset'], description: json['description']);
   }
 }

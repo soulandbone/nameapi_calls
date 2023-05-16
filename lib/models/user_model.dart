@@ -27,9 +27,9 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> e) {
     final name = UserName.fromMap(e);
-    final dob = UserDob.fromMap(e);
+    final dob = UserDob.fromMap(e['dob']);
     final profileImage = ProfileImage(thumbnail: e['picture']['thumbnail']);
-    final location = UserLocation.fromMap(e);
+    final location = UserLocation.fromMap(e['location']);
     return User(
         gender: e['gender'],
         mail: e['email'],
