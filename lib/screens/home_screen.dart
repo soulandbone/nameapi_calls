@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   foregroundImage: NetworkImage(user.profileImage.thumbnail)),
               title: Text(user.fullName),
               subtitle: Text(user.mail),
-              trailing: Text(user.nat),
+              trailing: Text(user.location.country),
             ),
           );
         },

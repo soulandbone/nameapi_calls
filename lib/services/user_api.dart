@@ -20,31 +20,35 @@ class UserApi {
           title: e['name']['title'],
           first: e['name']['first'],
           last: e['name']['last']);
-      final picture = e['picture']['thumbnail'];
+      final thumbnail = e['picture']['thumbnail'];
       final date = e['dob']['date'];
       final dob = UserDob(age: e['dob']['age'], date: DateTime.parse(date));
+      final profileImage = ProfileImage(thumbnail: thumbnail);
+      final street = LocationStreet(
+          name: e['location']['street']['name'],
+          number: e['location']['street']['number']);
+      final coordinates = LocationCoordinates(
+          latitude: e['location']['coordinates']['latitude'],
+          longitude: e['location']['coordinates']['longitude']);
+      final timezone = LocationTimeZone(
+          offset: e['location']['timezone']['offset'],
+          description: e['location']['timezone']['description']);
+
       final location = UserLocation(
-        street: LocationStreet(
-            name: e['location']['street']['name'],
-            number: e['location']['street']['number'].toString()),
-        city: e['location']['city'],
-        state: e['location']['state'],
-        country: e['location']['country'],
-        postcode: e['location']['postcode'].toString(),
-        coordinates: LocationCoordinates(
-            latitude: e['location']['coordinates']['latitude'],
-            longitude: e['location']['coordinates']['longitude']),
-        timeZone: LocationTimeZone(
-            offset: e['location']['timezone']['offset'],
-            description: e['location']['timezone']['description']),
-      );
+          street: street,
+          city: e['location']['city'],
+          state: e['location']['state'],
+          country: e['location']['country'],
+          postcode: e['location']['postcode'].toString(),
+          coordinates: coordinates,
+          timeZone: timezone);
       return User(
           gender: e['gender'],
           mail: e['email'],
           cell: e['cell'],
           nat: e['nat'],
           userName: name,
-          profileImage: ProfileImage(thumbnail: picture),
+          profileImage: profileImage,
           location: location,
           dob: dob);
     }).toList();
